@@ -9,16 +9,16 @@ export const siteConfig = {
   // ==========================================
   // 1. BUSINESS DETAILS
   // ==========================================
-  companyName: "Raleigh Crawl Space Solutions", // <-- REPLACE COMPANY NAME HERE
-  phone: "(919) 555-0199",                      // <-- REPLACE PHONE NUMBER HERE
-  phoneNumeric: "9195550199",                   // <-- REPLACE RAW NUMERIC PHONE HERE (no spaces/hyphens for href="tel:")
-  email: "info@raleighcrawlspacesolutions.com",  // <-- REPLACE EMAIL HERE
+  companyName: "The Crawl Space Guy CS", // <-- REPLACE COMPANY NAME HERE
+  phone: "(984) 328-3903",                      // <-- REPLACE PHONE NUMBER HERE
+  phoneNumeric: "9843283903",                   // <-- REPLACE RAW NUMERIC PHONE HERE (no spaces/hyphens for href="tel:")
+  email: "robertj8845@gmail.com",  // <-- REPLACE EMAIL HERE
   licenseInfo: "NC License #987654 | Insured & Bonded", // <-- REPLACE LICENSE & INSURANCE INFO HERE
 
   // ==========================================
   // 2. FINANCING INFO
   // ==========================================
-  financingInfo: "0% Financing available for 12 months for qualified buyers. Plans starting as low as $99/mo.", // <-- REPLACE FINANCING DETAILS HERE
+  financingInfo: "Ask about our financing for qualified buyers", // <-- REPLACE FINANCING DETAILS HERE
 
   // ==========================================
   // 3. SERVICE AREAS (Raleigh / Triangle area)
