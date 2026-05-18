@@ -9,10 +9,11 @@ export const siteConfig = {
   // ==========================================
   // 1. BUSINESS DETAILS
   // ==========================================
-  companyName: "The Crawl Space Guy CS", // <-- REPLACE COMPANY NAME HERE
+  companyName: "The Crawl Space Guys NC", // <-- REPLACE COMPANY NAME HERE
   phone: "(984) 328-3903",                      // <-- REPLACE PHONE NUMBER HERE
   phoneNumeric: "9843283903",                   // <-- REPLACE RAW NUMERIC PHONE HERE (no spaces/hyphens for href="tel:")
   email: "robertj8845@gmail.com",  // <-- REPLACE EMAIL HERE
+  address: "123 Raleigh Oaks Dr, Raleigh, NC 27601", // <-- REPLACE PHYSICAL ADDRESS HERE
   licenseInfo: "NC License #987654 | Insured & Bonded", // <-- REPLACE LICENSE & INSURANCE INFO HERE
 
   // ==========================================
@@ -46,7 +47,7 @@ export const siteConfig = {
       name: "David K.",
       location: "Raleigh, NC",
       stars: 5,
-      text: "We had a musty smell in our home for over a year. Raleigh Crawl Space Solutions came out, did a full inspection, and walked us through the crawl space pictures. They installed a full encapsulation and dehumidifier, and within 24 hours, the musty odor was completely gone. Honest recommendations and clean work!"
+      text: "We had a musty smell in our home for over a year. The Crawl Space Guys NC came out, did a full inspection, and walked us through the crawl space pictures. They installed a full encapsulation and dehumidifier, and within 24 hours, the musty odor was completely gone. Honest recommendations and clean work!"
     },
     {
       id: 2,
@@ -61,6 +62,20 @@ export const siteConfig = {
       location: "Apex, NC",
       stars: 5,
       text: "During the heavy spring rains, our crawl space would pool with water. They installed a sump pump and a French drain system. The crew was polite, clean, and kept us documented with photos throughout the job. Fantastic local business!"
+    },
+    {
+      id: 4,
+      name: "Emily R.",
+      location: "Wake Forest, NC",
+      stars: 5,
+      text: "Our home always had humid, sticky floors in the summer. The Crawl Space Guys NC installed a commercial dehumidifier and sealed our vents. The difference in our air quality and energy bills was immediate. Incredible local service!"
+    },
+    {
+      id: 5,
+      name: "Marcus H.",
+      location: "Durham, NC",
+      stars: 5,
+      text: "Excellent communication from start to finish. They explained exactly how they would sister our rotted floor joists and treat the mold. The photo-documented findings made us feel very confident in their work. 5 stars!"
     }
   ],
 

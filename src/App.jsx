@@ -3,13 +3,22 @@ import { siteConfig } from './config/siteConfig'
 
 function App() {
   const [openFaq, setOpenFaq] = useState(null)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [formSubmitted, setFormSubmitted] = useState(false)
+  const [secondarySubmitted, setSecondarySubmitted] = useState(false)
+  
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
     email: '',
-    address: '',
+    zipcode: '',
     message: ''
+  })
+
+  const [secondaryData, setSecondaryData] = useState({
+    name: '',
+    phone: '',
+    zipcode: ''
   })
 
   const toggleFaq = (index) => {
@@ -24,58 +33,339 @@ function App() {
     }))
   }
 
+  const handleSecondaryInputChange = (e) => {
+    const { name, value } = e.target
+    setSecondaryData(prev => ({
+      ...prev,
+      [name]: value
+    }))
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault()
-    // Mock lead generation logic
-    console.log('Lead submitted:', formData)
+    // Simulated lead generation logic
+    console.log('Primary Lead submitted:', formData)
     setFormSubmitted(true)
     setFormData({
       name: '',
       phone: '',
       email: '',
-      address: '',
+      zipcode: '',
       message: ''
     })
   }
 
+  const handleSecondarySubmit = (e) => {
+    e.preventDefault()
+    // Simulated lead generation logic for secondary quick form
+    console.log('Secondary Quick Lead submitted:', secondaryData)
+    setSecondarySubmitted(true)
+    setSecondaryData({
+      name: '',
+      phone: '',
+      zipcode: ''
+    })
+  }
+
+  const handleProblemSelect = (problemName) => {
+    const messageTemplate = `Hi! I'm concerned about ${problemName.toLowerCase()} under my home and would like to schedule a free crawl space inspection to get a professional assessment.`
+    setFormData(prev => ({
+      ...prev,
+      message: messageTemplate
+    }))
+    
+    // Smooth scroll to the main inspection form
+    const formElement = document.getElementById('inspection-form')
+    if (formElement) {
+      formElement.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
+
+  const handleServiceSelect = (serviceName) => {
+    const messageTemplate = `Hi! I'd like to get a free quote for ${serviceName} and discuss the best solutions for my home.`
+    setFormData(prev => ({
+      ...prev,
+      message: messageTemplate
+    }))
+    
+    // Smooth scroll to the main inspection form
+    const formElement = document.getElementById('inspection-form')
+    if (formElement) {
+      formElement.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
+
+  const problemCards = [
+    {
+      title: "Musty Smells",
+      icon: "👃",
+      desc: "Damp air and mold spores from the crawl space rise up into your first-floor rooms through the Stack Effect."
+    },
+    {
+      title: "Sagging Floors",
+      icon: "👣",
+      desc: "Excess humidity weakens structural wood joists, causing them to rot, sag, and make floors bouncy or uneven."
+    },
+    {
+      title: "Standing Water",
+      icon: "💧",
+      desc: "Heavy Raleigh rain and poor external yard drainage create pools of water in your crawl space, risking foundation shift."
+    },
+    {
+      title: "High Humidity",
+      icon: "🌡️",
+      desc: "A wet crawl space raises indoor relative humidity, making your air conditioner work harder and raising energy bills."
+    },
+    {
+      title: "Mold & Mildew",
+      icon: "🍄",
+      desc: "Fungus grows aggressively on damp wood framing and floor insulation, eating away at your structural timbers."
+    },
+    {
+      title: "Damaged Insulation",
+      icon: "🕸️",
+      desc: "Wet, falling fiberglass insulation loses its R-value, traps moisture against joists, and becomes a pest nesting ground."
+    },
+    {
+      title: "Pests & Rodents",
+      icon: "🐀",
+      desc: "Insects, termites, and rodents thrive in dark, damp spaces, causing damage and leaving behind unhealthy dander."
+    },
+    {
+      title: "Wood Rot",
+      icon: "🪵",
+      desc: "Continuous exposure to high moisture content causes wood decay, endangering the safety of your home's foundation."
+    }
+  ]
+
+  const services = [
+    {
+      title: "Crawl Space Inspections",
+      image: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=600&q=80",
+      altText: "Professional crawl space moisture inspection in Raleigh, NC by local experts",
+      desc: "A comprehensive assessment of your crawl space. We check wood moisture levels, inspect framing, check for mold, and provide you with a detailed, photo-documented report.",
+      cta: "Schedule Free Inspection"
+    },
+    {
+      title: "Crawl Space Encapsulation",
+      image: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=600&q=80",
+      altText: "Premium sealed crawl space encapsulation and white vapor barrier installation in a Raleigh home",
+      desc: "The ultimate moisture barrier. We completely seal your crawl space floor, walls, and vents with thick, durable white vapor barrier to keep damp air, mold, and radon gas out.",
+      cta: "Get Encapsulation Quote"
+    },
+    {
+      title: "Vapor Barriers",
+      image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=600&q=80",
+      altText: "Ground vapor barrier installation in Raleigh, NC crawl space to block ground moisture",
+      desc: "Cost-effective moisture prevention. We replace damaged, wet plastic sheets with clean, properly overlapping ground barriers to prevent ground moisture from rising.",
+      cta: "Request Vapor Barrier"
+    },
+    {
+      title: "Drainage Systems",
+      image: "https://images.unsplash.com/photo-1508459855340-fb63ac591728?auto=format&fit=crop&w=600&q=80",
+      altText: "Crawl space drainage system and French drain installation underneath a Triangle area home",
+      desc: "Keep water from pooling. We install interior and exterior perimeter French drain systems that direct crawl space water safely away from your home's foundation.",
+      cta: "Request Drainage Quote"
+    },
+    {
+      title: "Sump Pump Systems",
+      image: "https://images.unsplash.com/photo-1585338107529-13afc5f02586?auto=format&fit=crop&w=600&q=80",
+      altText: "Heavy-duty sump pump system with automatic basin installed in Raleigh crawl space for flood protection",
+      desc: "Automatic flood protection. Heavy-duty, long-lasting sump pumps with backup batteries to automatically collect and discharge standing water out of the space.",
+      cta: "Get Sump Pump Quote"
+    },
+    {
+      title: "Crawl Space Dehumidifiers",
+      image: "https://images.unsplash.com/photo-1604719312566-8912e9227c6a?auto=format&fit=crop&w=600&q=80",
+      altText: "Commercial-grade energy-efficient crawl space dehumidifier running under a Wake County home",
+      desc: "Maintain healthy humidity. We install energy-efficient crawl space dehumidifiers to automatically maintain moisture levels below 55% to permanently block mold.",
+      cta: "Request Dehumidifier Quote"
+    },
+    {
+      title: "Mold/Moisture Solutions",
+      image: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=600&q=80",
+      altText: "Professional crawl space mold removal and wood sanitation treatment in Raleigh, NC",
+      desc: "Safe mold removal. We treat and clean infected framing, neutralizing wood decay fungi to improve air quality and protect your structural timbers.",
+      cta: "Request Mold Treatment"
+    },
+    {
+      title: "Wood Rot Repair",
+      image: "https://images.unsplash.com/photo-1534224039826-c7a0dea0e66a?auto=format&fit=crop&w=600&q=80",
+      altText: "Sistered floor joists and structural wood rot repair for bouncy floors in Raleigh, NC",
+      desc: "Strengthen weak floors. We sister damaged floor joists, replace sagged sills, and install heavy-duty steel jacks to level bouncy first-floor framing.",
+      cta: "Request Structural Repair"
+    },
+    {
+      title: "Insulation Replacement",
+      image: "https://images.unsplash.com/photo-1581094288338-2314dddb7ecc?auto=format&fit=crop&w=600&q=80",
+      altText: "Replacing old wet crawl space insulation with clean pest-resistant insulation in Cary, NC",
+      desc: "Boost home efficiency. We remove falling, mold-ridden fiberglass and install clean, pest-resistant insulation options to lower energy bills year-round.",
+      cta: "Request Insulation Quote"
+    }
+  ]
+
+  const galleryItems = [
+    {
+      id: 1,
+      title: "Wet Space vs. Encapsulation",
+      beforeImage: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=400&q=80",
+      afterImage: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=600&q=80",
+      desc: "Damp Dirt Floor vs. Premium Sealed Encapsulation"
+    },
+    {
+      id: 2,
+      title: "Wood Rot vs. Wood Rot Repair",
+      beforeImage: "https://images.unsplash.com/photo-1542013936693-8848e5740a7a?auto=format&fit=crop&w=400&q=80",
+      afterImage: "https://images.unsplash.com/photo-1534224039826-c7a0dea0e66a?auto=format&fit=crop&w=400&q=80",
+      desc: "Rotted Joists vs. Sistered Beams & Support Jacks"
+    },
+    {
+      id: 3,
+      title: "Torn Insulation vs. Sealed Vapor Liner",
+      beforeImage: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=400&q=80",
+      afterImage: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=400&q=80",
+      desc: "Falling Fiberglass vs. Thick, Double-Reinforced Liner"
+    },
+    {
+      id: 4,
+      title: "Poor Grading vs. French Drain & Sump Pump",
+      beforeImage: "https://images.unsplash.com/photo-1542013936693-8848e5740a7a?auto=format&fit=crop&w=400&q=80",
+      afterImage: "https://images.unsplash.com/photo-1585338107529-13afc5f02586?auto=format&fit=crop&w=400&q=80",
+      desc: "Standing Water Pools vs. Automated Sump & French Drains"
+    }
+  ]
+
+  const whyChooseUsBenefits = [
+    {
+      title: "Years of Local Experience",
+      desc: "Deeply familiar with Raleigh-Durham architectural builds, dense soil varieties, and environmental humidity factors."
+    },
+    {
+      title: "Honest, Clear Communication",
+      desc: "We focus purely on structural safety. Absolutely no scare tactics, commissions, or aggressive sales pitches."
+    },
+    {
+      title: "No-Pressure Free Inspections",
+      desc: "Entirely complimentary, detailed assessments for residential homeowners in local Triangle communities."
+    },
+    {
+      title: "Engineered Long-Term Solutions",
+      desc: "We rely on commercial-grade, multi-ply reinforced vapor barriers and durable sump drainage hardware."
+    },
+    {
+      title: "Clean & Respectful Workmanship",
+      desc: "Our crews maintain tight dust containment, use floor protection, and leave your property perfectly tidy."
+    },
+    {
+      title: "Detailed Photo & Video Findings",
+      desc: "We photograph and document every aspect of our findings under your home so you see the exact reality."
+    },
+    {
+      title: "100% Locally Owned & Serviced",
+      desc: "A reliable community-based business focused on protecting local homes and ensuring structural safety."
+    }
+  ]
+
   return (
     <>
+      <a href="#main-content" className="skip-to-content">
+        Skip to Main Content
+      </a>
+
       {/* 1. Sticky Header */}
       <header className="header">
         <div className="container header__container">
           <a href="#" className="header__brand">
-            <span className="header__logo">{siteConfig.companyName}</span>
-            <span className="header__tagline">Raleigh Crawl Space Specialists</span>
+            <img src="/logo.png" alt="The Crawl Space Guys NC Logo" className="header__logo-img" />
+            <div className="header__brand-text">
+              <span className="header__logo">{siteConfig.companyName}</span>
+              <span className="header__tagline">Serving Raleigh &amp; Surrounding Areas</span>
+            </div>
           </a>
+          
+          <button 
+            className={`header__burger ${mobileMenuOpen ? 'header__burger--active' : ''}`}
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle navigation menu"
+            aria-expanded={mobileMenuOpen}
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+          
+          <nav className={`header__menu ${mobileMenuOpen ? 'header__menu--open' : ''}`}>
+            <a href="#services" className="header__menu-link" onClick={() => setMobileMenuOpen(false)}>Services</a>
+            <a href="#why-choose-us" className="header__menu-link" onClick={() => setMobileMenuOpen(false)}>Why Choose Us</a>
+            <a href="#before-after" className="header__menu-link" onClick={() => setMobileMenuOpen(false)}>Before &amp; After</a>
+            <a href="#reviews" className="header__menu-link" onClick={() => setMobileMenuOpen(false)}>Reviews</a>
+            <a href="#faqs" className="header__menu-link" onClick={() => setMobileMenuOpen(false)}>FAQs</a>
+            <div className="header__menu-mobile-nav">
+              <a href={`tel:${siteConfig.phoneNumeric}`} className="header__phone">
+                <span aria-hidden="true">📞</span>
+                <span>{siteConfig.phone}</span>
+              </a>
+              <a href="#inspection-form" className="btn btn--cta-orange" onClick={() => setMobileMenuOpen(false)}>
+                Free Inspection
+              </a>
+            </div>
+          </nav>
+
           <div className="header__nav">
             <a href={`tel:${siteConfig.phoneNumeric}`} className="header__phone">
               <span aria-hidden="true">📞</span>
               <span>{siteConfig.phone}</span>
             </a>
-            <a href="#inspection-form" className="btn btn--primary">
+            <a href="#inspection-form" className="btn btn--cta-orange">
               Free Inspection
             </a>
           </div>
         </div>
       </header>
 
-      {/* 2. Hero Section */}
-      <section className="hero">
-        <div className="container hero__grid">
-          <div className="hero__content">
-            <h1>Crawl Space Repair &amp; Encapsulation in Raleigh, NC</h1>
-            <p className="subheadline">
-              Protect your home from moisture, mold, wood rot, pests, and foundation damage with experienced local crawl space specialists.
-            </p>
-            <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
-              <a href={`tel:${siteConfig.phoneNumeric}`} className="btn btn--primary btn--lg">
-                Call Now: {siteConfig.phone}
-              </a>
-              <a href="#services" className="btn btn--outline-white btn--lg">
-                Explore Services
-              </a>
+      <main id="main-content">
+        {/* 2. Hero Section */}
+        <section 
+          className="hero" 
+          style={{ 
+            background: `linear-gradient(135deg, rgba(10, 46, 29, 0.94) 0%, rgba(25, 40, 30, 0.92) 100%), url('https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat`
+          }}
+        >
+          <div className="container hero__grid">
+            <div className="hero__content">
+              <div className="hero__rating-badge">
+                <span className="hero__stars">⭐⭐⭐⭐⭐</span>
+                <span className="hero__rating-text">4.9/5 (184+ Local Raleigh Reviews)</span>
+              </div>
+              <h1>Protect Your Home From Crawl Space Moisture &amp; Damage</h1>
+              <p className="subheadline">
+                Free crawl space inspections for homeowners in Raleigh, Cary, Apex, Wake Forest, Garner, Clayton, and surrounding areas.
+              </p>
+              
+              <div className="hero__trust-list">
+                <div className="hero__trust-bullet-item">
+                  <span className="bullet-icon" aria-hidden="true">🛡️</span>
+                  <span>Fully Licensed &amp; Insured NC #987654</span>
+                </div>
+                <div className="hero__trust-bullet-item">
+                  <span className="bullet-icon" aria-hidden="true">🏡</span>
+                  <span>Locally Owned &amp; Operated</span>
+                </div>
+                <div className="hero__trust-bullet-item">
+                  <span className="bullet-icon" aria-hidden="true">📸</span>
+                  <span>Complete Photo &amp; Video Findings</span>
+                </div>
+              </div>
+
+              <div className="hero__actions">
+                <a href="#inspection-form" className="btn btn--cta-orange btn--lg">
+                  Schedule Free Inspection
+                </a>
+                <a href={`tel:${siteConfig.phoneNumeric}`} className="btn btn--outline-white btn--lg">
+                  📞 Call Now
+                </a>
+              </div>
             </div>
-          </div>
 
           <div id="inspection-form" className="hero-form">
             <h3>Schedule a Free Crawl Space Inspection</h3>
@@ -85,13 +375,13 @@ function App() {
               <div style={{
                 backgroundColor: 'rgba(27,67,50,0.1)',
                 border: '1px solid var(--primary-green)',
-                padding: '20px',
+                padding: '24px',
                 borderRadius: 'var(--radius-sm)',
                 textAlign: 'center'
               }}>
                 <h4 style={{ color: 'var(--primary-green)', marginBottom: '8px' }}>Thank You!</h4>
-                <p style={{ fontSize: '0.9rem', color: 'var(--text-dark)' }}>
-                  Your request has been received. One of our Raleigh crawl space specialists will reach out shortly to schedule your free inspection.
+                <p style={{ fontSize: '0.95rem', color: 'var(--text-dark)' }}>
+                  Your request has been successfully received. One of our Raleigh crawl space specialists will reach out shortly to schedule your free inspection.
                 </p>
                 <button 
                   className="btn btn--secondary btn--sm" 
@@ -110,7 +400,7 @@ function App() {
                     id="name"
                     name="name"
                     className="form-input"
-                    placeholder="John Doe"
+                    placeholder="Enter your name"
                     required
                     value={formData.name}
                     onChange={handleInputChange}
@@ -125,7 +415,7 @@ function App() {
                       id="phone"
                       name="phone"
                       className="form-input"
-                      placeholder="(919) 555-0100"
+                      placeholder="(919) 555-0199"
                       required
                       value={formData.phone}
                       onChange={handleInputChange}
@@ -138,7 +428,7 @@ function App() {
                       id="email"
                       name="email"
                       className="form-input"
-                      placeholder="john@example.com"
+                      placeholder="name@domain.com"
                       required
                       value={formData.email}
                       onChange={handleInputChange}
@@ -147,21 +437,21 @@ function App() {
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="address">Home Address / Zip Code</label>
+                  <label htmlFor="zipcode">Zip Code</label>
                   <input
                     type="text"
-                    id="address"
-                    name="address"
+                    id="zipcode"
+                    name="zipcode"
                     className="form-input"
-                    placeholder="123 Raleigh Oaks Dr, Raleigh, NC 27601"
+                    placeholder="e.g. 27601"
                     required
-                    value={formData.address}
+                    value={formData.zipcode}
                     onChange={handleInputChange}
                   />
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="message">Brief Message (Optional)</label>
+                  <label htmlFor="message">Brief Message / Concern (Optional)</label>
                   <textarea
                     id="message"
                     name="message"
@@ -174,7 +464,7 @@ function App() {
                 </div>
 
                 <button type="submit" className="btn btn--secondary btn--full" style={{ fontWeight: '700' }}>
-                  Get My Free Inspection
+                  Schedule Free Inspection
                 </button>
               </form>
             )}
@@ -210,6 +500,11 @@ function App() {
             <span className="trust-label">Financing Available</span>
             <span className="trust-sublabel">Plans from $99/mo*</span>
           </div>
+          <div className="trust-item">
+            <span className="trust-icon" aria-hidden="true">🛡️</span>
+            <span className="trust-label">Licensed &amp; Insured</span>
+            <span className="trust-sublabel">NC License #987654</span>
+          </div>
         </div>
       </section>
 
@@ -218,73 +513,30 @@ function App() {
         <div className="container">
           <h2 className="text-center" style={{ color: 'var(--primary-green)' }}>Signs Your Crawl Space Needs Attention</h2>
           <p className="text-center text-light" style={{ maxWidth: '600px', margin: '0 auto 40px auto' }}>
-            Crawl space issues can slowly compromise your home's structural integrity, air quality, and energy efficiency. Look out for these common warning signs.
+            Crawl space issues slowly compromise your home's structural integrity, indoor air quality, and energy bills. Click any warning sign below to inquire immediately.
           </p>
           
           <div className="problem-grid">
-            <div className="problem-card">
-              <div className="problem-icon-wrapper" aria-hidden="true">👃</div>
-              <h3>Musty Smells</h3>
-              <p style={{ fontSize: '0.9rem', color: 'var(--text-medium)' }}>
-                Damp air and mold spores from the crawl space rise up into your first-floor rooms through the "stack effect."
-              </p>
-            </div>
-            
-            <div className="problem-card">
-              <div className="problem-icon-wrapper" aria-hidden="true">👣</div>
-              <h3>Sagging Floors</h3>
-              <p style={{ fontSize: '0.9rem', color: 'var(--text-medium)' }}>
-                Excess humidity weakens wood joists, causing them to rot, sag, and make floors bouncy or uneven.
-              </p>
-            </div>
-            
-            <div className="problem-card">
-              <div className="problem-icon-wrapper" aria-hidden="true">💧</div>
-              <h3>Standing Water</h3>
-              <p style={{ fontSize: '0.9rem', color: 'var(--text-medium)' }}>
-                Heavy rain and poor external drainage can create pools of water in your crawl space, raising humidity levels.
-              </p>
-            </div>
-            
-            <div className="problem-card">
-              <div className="problem-icon-wrapper" aria-hidden="true">🌡️</div>
-              <h3>High Humidity</h3>
-              <p style={{ fontSize: '0.9rem', color: 'var(--text-medium)' }}>
-                A wet crawl space raises indoor relative humidity, making your air conditioner work harder and raising energy bills.
-              </p>
-            </div>
-
-            <div className="problem-card">
-              <div className="problem-icon-wrapper" aria-hidden="true">🍄</div>
-              <h3>Mold &amp; Mildew</h3>
-              <p style={{ fontSize: '0.9rem', color: 'var(--text-medium)' }}>
-                Fungus grows aggressively on damp wood framing and floor insulation, eating away at your structural timbers.
-              </p>
-            </div>
-
-            <div className="problem-card">
-              <div className="problem-icon-wrapper" aria-hidden="true">🕸️</div>
-              <h3>Damaged Insulation</h3>
-              <p style={{ fontSize: '0.9rem', color: 'var(--text-medium)' }}>
-                Wet fiberglass insulation loses its R-value, sags out of the joist bays, and becomes a nesting ground for pests.
-              </p>
-            </div>
-
-            <div className="problem-card">
-              <div className="problem-icon-wrapper" aria-hidden="true">🐀</div>
-              <h3>Pests &amp; Rodents</h3>
-              <p style={{ fontSize: '0.9rem', color: 'var(--text-medium)' }}>
-                Insects, termites, and rodents thrive in dark, damp spaces, causing damage and leaving behind unhealthy dander.
-              </p>
-            </div>
-
-            <div className="problem-card">
-              <div className="problem-icon-wrapper" aria-hidden="true">🪵</div>
-              <h3>Wood Rot</h3>
-              <p style={{ fontSize: '0.9rem', color: 'var(--text-medium)' }}>
-                Continuous exposure to high moisture content causes wood decay, endangering the safety of your home's foundation.
-              </p>
-            </div>
+            {problemCards.map((prob, idx) => (
+              <div 
+                key={idx} 
+                className="problem-card" 
+                onClick={() => handleProblemSelect(prob.title)}
+                style={{ cursor: 'pointer' }}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => { if (e.key === 'Enter') handleProblemSelect(prob.title); }}
+              >
+                <div className="problem-icon-wrapper" aria-hidden="true">{prob.icon}</div>
+                <h3>{prob.title}</h3>
+                <p style={{ fontSize: '0.9rem', color: 'var(--text-medium)', marginBottom: '12px' }}>
+                  {prob.desc}
+                </p>
+                <span style={{ fontSize: '0.85rem', color: 'var(--primary-green)', fontWeight: '700', marginTop: 'auto' }}>
+                  Report This Issue →
+                </span>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -294,126 +546,55 @@ function App() {
         <div className="container">
           <h2 className="text-center" style={{ color: 'var(--primary-green)' }}>Our Professional Crawl Space &amp; Basement Services</h2>
           <p className="text-center text-light" style={{ maxWidth: '600px', margin: '0 auto 20px auto' }}>
-            We provide engineered, long-term solutions tailored to North Carolina's unique clay soils and extreme seasonal humidity.
+            We provide custom, engineered solutions tailored to North Carolina's dense red clay soils and seasonal humidity patterns.
           </p>
 
           <div className="services-grid">
-            <div className="service-card">
-              <div className="service-image-placeholder">Crawl Space Inspections</div>
-              <div className="service-content">
-                <h3>Crawl Space Inspections</h3>
-                <p>A full assessment of your crawl space. We check wood moisture levels, inspect framing, check for mold, and provide you with a documented report with photos.</p>
-                <a href="#inspection-form" className="service-link">Schedule Free Inspection →</a>
+            {services.map((svc, idx) => (
+              <div key={idx} className="service-card">
+                <div className="service-image-wrapper">
+                  <img 
+                    src={svc.image} 
+                    alt={svc.altText} 
+                    className="service-image" 
+                    loading="lazy" 
+                  />
+                </div>
+                <div className="service-content">
+                  <h3>{svc.title}</h3>
+                  <p>{svc.desc}</p>
+                  <button 
+                    onClick={() => handleServiceSelect(svc.title)}
+                    className="btn btn--outline-green btn--sm"
+                    style={{ marginTop: 'auto', alignSelf: 'flex-start', padding: '10px 20px', fontSize: '0.85rem' }}
+                  >
+                    {svc.cta} →
+                  </button>
+                </div>
               </div>
-            </div>
-
-            <div className="service-card">
-              <div className="service-image-placeholder">Encapsulation Systems</div>
-              <div className="service-content">
-                <h3>Crawl Space Encapsulation</h3>
-                <p>The ultimate moisture barrier. We completely seal your crawl space floor, walls, and vents with thick, durable white vapor barrier to keep damp air and mold out.</p>
-                <a href="#inspection-form" className="service-link">Get a Quote →</a>
-              </div>
-            </div>
-
-            <div className="service-card">
-              <div className="service-image-placeholder">Vapor Barriers</div>
-              <div className="service-content">
-                <h3>Vapor Barriers</h3>
-                <p>Cost-effective moisture prevention. We replace damaged, wet plastic sheets with clean, properly overlapping ground barriers to prevent ground moisture from rising.</p>
-                <a href="#inspection-form" className="service-link">Request Service →</a>
-              </div>
-            </div>
-
-            <div className="service-card">
-              <div className="service-image-placeholder">Basement Drainage</div>
-              <div className="service-content">
-                <h3>Drainage &amp; French Drains</h3>
-                <p>Keep water from pooling. We install interior and exterior perimeter French drain systems that direct crawl space water safely away from your home's foundation.</p>
-                <a href="#inspection-form" className="service-link">Schedule Inspection →</a>
-              </div>
-            </div>
-
-            <div className="service-card">
-              <div className="service-image-placeholder">Sump Pump Systems</div>
-              <div className="service-content">
-                <h3>Sump Pump Systems</h3>
-                <p>Automatic flood protection. Heavy-duty, long-lasting sump pumps with backup batteries to automatically collect and discharge standing water out of the space.</p>
-                <a href="#inspection-form" className="service-link">Get a Quote →</a>
-              </div>
-            </div>
-
-            <div className="service-card">
-              <div className="service-image-placeholder">Energy Dehumidifiers</div>
-              <div className="service-content">
-                <h3>Commercial Dehumidifiers</h3>
-                <p>Maintain healthy humidity. We install energy-efficient crawl space dehumidifiers to automatically maintain moisture levels below 55% to permanently block mold.</p>
-                <a href="#inspection-form" className="service-link">Request Service →</a>
-              </div>
-            </div>
-
-            <div className="service-card">
-              <div className="service-image-placeholder">Mold Remediation</div>
-              <div className="service-content">
-                <h3>Mold Remediation</h3>
-                <p>Safe mold removal. We treat and clean infected framing, neutralizing wood decay fungi to improve air quality and protect your structural timbers.</p>
-                <a href="#inspection-form" className="service-link">Schedule Inspection →</a>
-              </div>
-            </div>
-
-            <div className="service-card">
-              <div className="service-image-placeholder">Structural Wood Repair</div>
-              <div className="service-content">
-                <h3>Wood Rot &amp; Structural Repair</h3>
-                <p>Strengthen weak floors. We sister damaged floor joists, replace sagged sills, and install heavy-duty steel jacks to level bouncy first-floor framing.</p>
-                <a href="#inspection-form" className="service-link">Request Service →</a>
-              </div>
-            </div>
-
-            <div className="service-card">
-              <div className="service-image-placeholder">Insulation Replacement</div>
-              <div className="service-content">
-                <h3>Insulation Replacement</h3>
-                <p>Boost home efficiency. We remove falling, mold-ridden fiberglass and install clean, pest-resistant insulation options to lower energy bills year-round.</p>
-                <a href="#inspection-form" className="service-link">Schedule Free Inspection →</a>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* 6. Why Choose Us Section */}
-      <section className="section">
+      <section id="why-choose-us" className="section">
         <div className="container why-grid">
           <div>
-            <h2 style={{ color: 'var(--primary-green)' }}>Professional Care, Honest Recommendations</h2>
+            <h2 style={{ color: 'var(--primary-green)' }}>Professional Local Care &amp; Honest Recommendations</h2>
             <p className="text-light" style={{ marginBottom: '24px' }}>
-              We believe in delivering long-term, custom crawl space solutions for Raleigh area families. We do not use high-pressure commission sales or scare tactics. We focus on showing you exactly what we find, providing clear options, and doing clean, durable work.
+              We believe in delivering long-term, structural protection for Raleigh area families. We do not use high-pressure commission tactics. We focus on showing you exactly what we find with complete photo reports and performing premium workmanship.
             </p>
-            <ul className="why-features">
-              <li className="why-feature-item">
-                <span className="why-feature-icon" aria-hidden="true">🛡️</span>
-                <div className="why-feature-text">
-                  <h4>Years of Experienced Work</h4>
-                  <p>Our technicians are highly skilled crawl space and foundation repair specialists with deep expertise in Southern home build styles.</p>
-                </div>
-              </li>
-              
-              <li className="why-feature-item">
-                <span className="why-feature-icon" aria-hidden="true">📸</span>
-                <div className="why-feature-text">
-                  <h4>Complete Photo Documentation</h4>
-                  <p>We photograph every step of our findings and our work. You see exactly what we see under your home before signing off.</p>
-                </div>
-              </li>
-
-              <li className="why-feature-item">
-                <span className="why-feature-icon" aria-hidden="true">✨</span>
-                <div className="why-feature-text">
-                  <h4>Clean, Durable Solutions</h4>
-                  <p>We treat your home like our own. Our materials are commercial-grade, and our encapsulation liners are thick and double-reinforced.</p>
-                </div>
-              </li>
+            <ul className="why-features" style={{ listStyle: 'none', padding: 0 }}>
+              {whyChooseUsBenefits.map((benefit, idx) => (
+                <li key={idx} className="why-feature-item" style={{ display: 'flex', gap: '16px', marginBottom: '16px' }}>
+                  <span className="why-feature-icon" style={{ fontSize: '1.4rem', color: 'var(--primary-green)' }} aria-hidden="true">✔</span>
+                  <div className="why-feature-text">
+                    <h4 style={{ margin: 0, color: 'var(--primary-green)', fontWeight: '700' }}>{benefit.title}</h4>
+                    <p style={{ margin: '4px 0 0 0', fontSize: '0.9rem', color: 'var(--text-medium)' }}>{benefit.desc}</p>
+                  </div>
+                </li>
+              ))}
             </ul>
           </div>
           
@@ -442,19 +623,21 @@ function App() {
         </div>
       </section>
 
-      {/* 7. Raleigh-Specific Section */}
+      {/* 7. Raleigh-Specific Geological & Local Section */}
       <section className="raleigh-section">
         <div className="container raleigh-grid">
           <div>
             <h2 style={{ color: 'var(--gold)' }}>Tailored Crawl Space Care for the Raleigh-Durham Triangle</h2>
-            <p style={{ color: 'var(--tan)', marginBottom: '20px', fontSize: '1.05rem' }}>
-              North Carolina's hot, humid summers, heavy seasonal rain, and dense red clay soils create a perfect storm for under-home moisture problems. Clay soils hold water close to your crawl space walls, while the high humidity causes moisture to condense on cold wood beams.
-            </p>
-            <p style={{ color: 'rgba(255,255,255,0.85)', marginBottom: '24px' }}>
-              Our engineered systems are specifically built to withstand NC weather conditions, keeping wood dry and crawl spaces completely healthy.
-            </p>
+            <div style={{ fontSize: '0.95rem', color: 'rgba(255, 255, 255, 0.95)', lineHeight: '1.7' }}>
+              <p style={{ marginBottom: '16px' }}>
+                <strong>The Threat of Raleigh's Red Clay Soil:</strong> Wake County's soils are packed with dense, heavy red clay. When wet, clay expands aggressively and retains massive volumes of groundwater for weeks. This saturated clay exerts hydrostatic pressure directly against your crawl space foundation walls, forcing moisture to seep into your crawl space through porous masonry block.
+              </p>
+              <p style={{ marginBottom: '20px' }}>
+                <strong>The Dangerous Stack Effect:</strong> In physical building mechanics, your home acts like a chimney. As warm air rises and escapes through the attic, it creates a powerful negative pressure vacuum on the lower levels. This <strong>Stack Effect draws up to 50% of your first-floor air directly from your crawl space</strong>. When moisture levels are high, this draws dangerous mold spores, rot odors, and allergens into your family's living areas, while placing a massive load on your HVAC system.
+              </p>
+            </div>
             
-            <h4 style={{ color: 'var(--white)', marginBottom: '12px', textTransform: 'uppercase', fontSize: '0.85rem', letterSpacing: '0.05em' }}>Areas We Serve Around Raleigh</h4>
+            <h4 style={{ color: 'var(--white)', marginBottom: '12px', textTransform: 'uppercase', fontSize: '0.85rem', letterSpacing: '0.05em' }}>Areas We Proudly Serve Around Raleigh</h4>
             <div className="raleigh-list">
               {siteConfig.serviceAreas.map((city, idx) => (
                 <div key={idx} className="raleigh-city-tag">{city}</div>
@@ -463,16 +646,16 @@ function App() {
           </div>
 
           <div style={{
-            backgroundColor: 'rgba(255,255,255,0.05)',
-            border: '1px solid rgba(255,255,255,0.15)',
+            backgroundColor: 'rgba(255,255,255,0.06)',
+            border: '1px solid rgba(255,255,255,0.18)',
             padding: '30px',
             borderRadius: 'var(--radius-md)',
             textAlign: 'center'
           }}>
             <h3 style={{ color: 'var(--white)', marginBottom: '12px' }}>Triangle Moisture Facts</h3>
             <div style={{ fontSize: '3rem', color: 'var(--gold)', margin: '16px 0' }}>🌦️</div>
-            <p style={{ fontSize: '0.95rem', color: 'rgba(255,255,255,0.9)', marginBottom: '16px' }}>
-              Raleigh receives an average of <strong>46 inches of rainfall</strong> annually. Coupled with summer relative humidity levels frequently reaching <strong>80-90%</strong>, open crawl space vents act like vacuums pulling moisture under your home.
+            <p style={{ fontSize: '0.95rem', color: 'rgba(255,255,255,0.9)', marginBottom: '16px', lineHeight: '1.6' }}>
+              Raleigh receives an average of <strong>46 inches of rain</strong> annually. Paired with peak summer humidity that routinely exceeds <strong>80-90%</strong>, open crawl space vents act like moisture vacuums, rotting support beams and growing mold.
             </p>
             <span className="badge-tag">Triangle Engineered Solutions</span>
           </div>
@@ -480,59 +663,49 @@ function App() {
       </section>
 
       {/* 8. Before/After Gallery Section */}
-      <section className="section">
+      <section id="before-after" className="section">
         <div className="container">
-          <h2 className="text-center" style={{ color: 'var(--primary-green)' }}>Our Before &amp; After Crawl Space Encapsulation</h2>
+          <h2 className="text-center" style={{ color: 'var(--primary-green)' }}>Our Before &amp; After Crawl Space Transformations</h2>
           <p className="text-center text-light" style={{ maxWidth: '600px', margin: '0 auto 40px auto' }}>
-            Witness the transformation. We take damp, dirty, mold-filled environments and turn them into bright, clean, fully insulated, healthy crawl spaces.
+            Witness how we take damp, mold-infected, structurally decaying crawl spaces and transform them into clean, dry, bright, and completely healthy environments.
           </p>
 
-          <div className="gallery-grid">
-            <div className="gallery-card">
-              <div className="gallery-visuals">
-                <div className="gallery-image-box gallery-image-box--before">
-                  <span className="gallery-badge gallery-badge--before">Before</span>
+          <div className="gallery-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '30px' }}>
+            {galleryItems.map((item) => (
+              <div key={item.id} className="gallery-card">
+                <div className="gallery-visuals">
+                  <div className="gallery-image-wrapper">
+                    <img 
+                      src={item.beforeImage} 
+                      alt={`Before: ${item.title} - The Crawl Space Guys NC`} 
+                      className="gallery-img" 
+                      loading="lazy" 
+                    />
+                    <span className="gallery-badge gallery-badge--before">Before</span>
+                  </div>
+                  <div className="gallery-image-wrapper gallery-image-wrapper--after">
+                    <img 
+                      src={item.afterImage} 
+                      alt={`After: ${item.title} - The Crawl Space Guys NC`} 
+                      className="gallery-img" 
+                      loading="lazy" 
+                    />
+                    <span className="gallery-badge gallery-badge--after">After</span>
+                  </div>
                 </div>
-                <div className="gallery-image-box gallery-image-box--after">
-                  <span className="gallery-badge gallery-badge--after">After</span>
-                </div>
+                <div className="gallery-desc">{item.desc}</div>
               </div>
-              <div className="gallery-desc">Full Encapsulation &amp; Wall Liners</div>
-            </div>
-
-            <div className="gallery-card">
-              <div className="gallery-visuals">
-                <div className="gallery-image-box gallery-image-box--before">
-                  <span className="gallery-badge gallery-badge--before">Before</span>
-                </div>
-                <div className="gallery-image-box gallery-image-box--after">
-                  <span className="gallery-badge gallery-badge--after">After</span>
-                </div>
-              </div>
-              <div className="gallery-desc">Mold Remediation &amp; Joist sistering</div>
-            </div>
-
-            <div className="gallery-card">
-              <div className="gallery-visuals">
-                <div className="gallery-image-box gallery-image-box--before">
-                  <span className="gallery-badge gallery-badge--before">Before</span>
-                </div>
-                <div className="gallery-image-box gallery-image-box--after">
-                  <span className="gallery-badge gallery-badge--after">After</span>
-                </div>
-              </div>
-              <div className="gallery-desc">Sump Pump &amp; Trench Installation</div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* 9. Reviews Section */}
-      <section className="section section--alt">
+      <section id="reviews" className="section section--alt">
         <div className="container">
           <h2 className="text-center" style={{ color: 'var(--primary-green)' }}>What Your Raleigh Neighbors Say</h2>
           <p className="text-center text-light" style={{ maxWidth: '600px', margin: '0 auto 40px auto' }}>
-            We've earned a reputaton across Wake, Durham, and Johnston counties for our clean work and transparent communication.
+            We've earned a stellar reputation across Wake, Durham, and Johnston counties for our clean workmanship and transparent, zero-pressure estimates.
           </p>
 
           <div className="reviews-grid">
@@ -555,7 +728,7 @@ function App() {
       </section>
 
       {/* 10. FAQ Section */}
-      <section className="section">
+      <section id="faqs" className="section">
         <div className="container">
           <h2 className="text-center" style={{ color: 'var(--primary-green)' }}>Crawl Space FAQs</h2>
           <p className="text-center text-light" style={{ maxWidth: '600px', margin: '0 auto 40px auto' }}>
@@ -586,50 +759,147 @@ function App() {
         </div>
       </section>
 
-      {/* 11. Final CTA Section */}
-      <section className="final-cta">
-        <div className="container final-cta__content">
-          <h2>Ready to Dry Out Your Crawl Space?</h2>
-          <p>
-            Get a 100% Free, comprehensive crawl space inspection and custom action plan. No sales pitches, just honest answers.
-          </p>
-          <div className="final-cta__buttons">
-            <a href="#inspection-form" className="btn btn--primary btn--lg">
-              Schedule Free Inspection
-            </a>
-            <a href={`tel:${siteConfig.phoneNumeric}`} className="btn btn--outline-white btn--lg">
-              📞 Call Now: {siteConfig.phone}
-            </a>
+      {/* 11. Final CTA & Secondary Lead Form Section */}
+      <section className="final-cta" style={{ textAlign: 'left', padding: '80px 0' }}>
+        <div className="container">
+          <div className="final-cta__grid">
+            <div className="final-cta__info">
+              <h2 style={{ color: 'var(--white)', fontSize: '2.5rem', marginBottom: '16px', lineHeight: '1.2' }}>
+                Ready to Dry Out Your Crawl Space &amp; Protect Your Home?
+              </h2>
+              <p style={{ color: 'var(--tan)', fontSize: '1.15rem', marginBottom: '24px', lineHeight: '1.6' }}>
+                Get your 100% Free, detailed, photo-documented crawl space inspection and custom repair recommendations. No commission-based sales pitches—just honest, local expertise.
+              </p>
+              
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '32px' }}>
+                <a href={`tel:${siteConfig.phoneNumeric}`} className="btn btn--primary btn--lg" style={{ display: 'inline-flex', alignSelf: 'flex-start' }}>
+                  📞 Call Office: {siteConfig.phone}
+                </a>
+              </div>
+
+              <div style={{ borderTop: '1px solid rgba(255,255,255,0.15)', paddingTop: '20px' }}>
+                <p style={{ fontSize: '0.85rem', color: 'var(--tan)', marginBottom: '8px', opacity: 0.9 }}>
+                  💳 <strong>Financing Terms:</strong> {siteConfig.financingInfo}
+                </p>
+                <p style={{ fontSize: '0.85rem', color: 'var(--tan)', opacity: 0.9 }}>
+                  🛡️ <strong>License Info:</strong> {siteConfig.licenseInfo}
+                </p>
+              </div>
+            </div>
+
+            <div className="final-cta__form-container">
+              <div className="hero-form" style={{ boxShadow: 'var(--shadow-xl)', borderTop: '4px solid var(--gold)' }}>
+                <h3 style={{ color: 'var(--primary-green)', marginBottom: '8px' }}>Request Quick Call Back</h3>
+                <p style={{ fontSize: '0.9rem', color: 'var(--text-medium)', marginBottom: '20px' }}>
+                  Enter your details below and a Raleigh specialist will call you back within 15 minutes.
+                </p>
+
+                {secondarySubmitted ? (
+                  <div style={{
+                    backgroundColor: 'rgba(27,67,50,0.1)',
+                    border: '1px solid var(--primary-green)',
+                    padding: '24px',
+                    borderRadius: 'var(--radius-sm)',
+                    textAlign: 'center'
+                  }}>
+                    <h4 style={{ color: 'var(--primary-green)', marginBottom: '8px' }}>Thank You!</h4>
+                    <p style={{ fontSize: '0.9rem', color: 'var(--text-dark)' }}>
+                      Your quick request has been received. We will contact you immediately at your provided number.
+                    </p>
+                    <button 
+                      className="btn btn--secondary btn--sm" 
+                      style={{ marginTop: '16px', padding: '8px 16px', fontSize: '0.85rem' }}
+                      onClick={() => setSecondarySubmitted(false)}
+                    >
+                      Submit Another Callback
+                    </button>
+                  </div>
+                ) : (
+                  <form onSubmit={handleSecondarySubmit}>
+                    <div className="form-group">
+                      <label htmlFor="sec-name">Full Name</label>
+                      <input
+                        type="text"
+                        id="sec-name"
+                        name="name"
+                        className="form-input"
+                        placeholder="Your Name"
+                        required
+                        value={secondaryData.name}
+                        onChange={handleSecondaryInputChange}
+                      />
+                    </div>
+                    
+                    <div className="form-group">
+                      <label htmlFor="sec-phone">Phone Number</label>
+                      <input
+                        type="tel"
+                        id="sec-phone"
+                        name="phone"
+                        className="form-input"
+                        placeholder="(919) 555-0199"
+                        required
+                        value={secondaryData.phone}
+                        onChange={handleSecondaryInputChange}
+                      />
+                    </div>
+
+                    <div className="form-group">
+                      <label htmlFor="sec-zipcode">Zip Code</label>
+                      <input
+                        type="text"
+                        id="sec-zipcode"
+                        name="zipcode"
+                        className="form-input"
+                        placeholder="e.g. 27601"
+                        required
+                        value={secondaryData.zipcode}
+                        onChange={handleSecondaryInputChange}
+                      />
+                    </div>
+
+                    <button type="submit" className="btn btn--secondary btn--full" style={{ fontWeight: '700', marginTop: '8px' }}>
+                      Request Call Back
+                    </button>
+                  </form>
+                )}
+              </div>
+            </div>
           </div>
-          <p style={{ marginTop: '24px', fontSize: '0.85rem', color: 'var(--tan)', opacity: 0.8 }}>
-            * {siteConfig.financingInfo}
-          </p>
         </div>
       </section>
+
+      </main>
 
       {/* 12. Footer */}
       <footer className="footer">
         <div className="container footer__grid">
           <div className="footer__col">
-            <h4 style={{ color: 'var(--white)', fontSize: '1.25rem', fontFamily: 'var(--font-heading)', fontWeight: '800' }}>
-              {siteConfig.companyName}
-            </h4>
-            <p style={{ margin: '12px 0 20px 0' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px' }}>
+              <img src="/logo.png" alt="The Crawl Space Guys NC Logo" className="footer__logo-img" style={{ height: '50px', width: 'auto', objectFit: 'contain' }} />
+              <h4 style={{ color: 'var(--white)', fontSize: '1.25rem', fontFamily: 'var(--font-heading)', fontWeight: '800', margin: 0, textTransform: 'none', letterSpacing: 'normal' }}>
+                {siteConfig.companyName}
+              </h4>
+            </div>
+            <p style={{ margin: '0 0 20px 0' }}>
               Raleigh area's premier crawl space encapsulation, mold removal, sump pump, and floor repair specialists.
             </p>
-            <span style={{ fontSize: '0.8rem', color: 'var(--gold)' }}>{siteConfig.licenseInfo}</span>
+            <span style={{ fontSize: '0.8rem', color: 'var(--accent-orange)' }}>{siteConfig.licenseInfo}</span>
           </div>
 
           <div className="footer__col">
             <h4>Quick Links</h4>
             <a href="#" className="footer__link">Back to Top</a>
             <a href="#services" className="footer__link">Our Services</a>
-            <a href="#inspection-form" className="footer__link">Schedule Free Inspection</a>
-            <a href={`tel:${siteConfig.phoneNumeric}`} className="footer__link">Call Office: {siteConfig.phone}</a>
+            <a href="#why-choose-us" className="footer__link">Why Choose Us</a>
+            <a href="#before-after" className="footer__link">Before &amp; After</a>
+            <a href="#reviews" className="footer__link">Reviews</a>
+            <a href="#faqs" className="footer__link">FAQs</a>
           </div>
 
           <div className="footer__col">
             <h4>Office Info</h4>
+            <p><strong>Address:</strong> {siteConfig.address}</p>
             <p><strong>Email:</strong> {siteConfig.email}</p>
             <p><strong>Phone:</strong> {siteConfig.phone}</p>
             <p><strong>Coverage Area:</strong> Raleigh, NC &amp; Surrounding Triangle Areas</p>
@@ -658,6 +928,16 @@ function App() {
           </div>
         </div>
       </footer>
+
+      {/* Sticky Mobile CTA Bar */}
+      <div className="mobile-cta-bar">
+        <a href={`tel:${siteConfig.phoneNumeric}`} className="mobile-cta-bar__btn mobile-cta-bar__btn--call">
+          <span>📞 Call Now</span>
+        </a>
+        <a href="#inspection-form" className="mobile-cta-bar__btn mobile-cta-bar__btn--inspect">
+          <span>📅 Free Inspection</span>
+        </a>
+      </div>
     </>
   )
 }
