@@ -141,42 +141,42 @@ function App() {
   const services = [
     {
       title: "Crawl Space Inspections",
-      image: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=600&q=80",
+      image: "/inspection.jpg",
       altText: "Professional crawl space moisture inspection in Raleigh, NC by local experts",
       desc: "A comprehensive assessment of your crawl space. We check wood moisture levels, inspect framing, check for mold, and provide you with a detailed, photo-documented report.",
       cta: "Schedule Free Inspection"
     },
     {
       title: "Crawl Space Encapsulation",
-      image: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=600&q=80",
+      image: "/encapsulation.jpg",
       altText: "Premium sealed crawl space encapsulation and white vapor barrier installation in a Raleigh home",
       desc: "The ultimate moisture barrier. We completely seal your crawl space floor, walls, and vents with thick, durable white vapor barrier to keep damp air, mold, and radon gas out.",
       cta: "Get Encapsulation Quote"
     },
     {
       title: "Vapor Barriers",
-      image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=600&q=80",
+      image: "/vapor-barrier.jpg",
       altText: "Ground vapor barrier installation in Raleigh, NC crawl space to block ground moisture",
       desc: "Cost-effective moisture prevention. We replace damaged, wet plastic sheets with clean, properly overlapping ground barriers to prevent ground moisture from rising.",
       cta: "Request Vapor Barrier"
     },
     {
       title: "Drainage Systems",
-      image: "https://images.unsplash.com/photo-1508459855340-fb63ac591728?auto=format&fit=crop&w=600&q=80",
+      image: "/drainage-system.jpg",
       altText: "Crawl space drainage system and French drain installation underneath a Triangle area home",
       desc: "Keep water from pooling. We install interior and exterior perimeter French drain systems that direct crawl space water safely away from your home's foundation.",
       cta: "Request Drainage Quote"
     },
     {
       title: "Sump Pump Systems",
-      image: "https://images.unsplash.com/photo-1585338107529-13afc5f02586?auto=format&fit=crop&w=600&q=80",
+      image: "/sump-pump.jpg",
       altText: "Heavy-duty sump pump system with automatic basin installed in Raleigh crawl space for flood protection",
       desc: "Automatic flood protection. Heavy-duty, long-lasting sump pumps with backup batteries to automatically collect and discharge standing water out of the space.",
       cta: "Get Sump Pump Quote"
     },
     {
       title: "Crawl Space Dehumidifiers",
-      image: "https://images.unsplash.com/photo-1604719312566-8912e9227c6a?auto=format&fit=crop&w=600&q=80",
+      image: "/dehumidifier.jpg",
       altText: "Commercial-grade energy-efficient crawl space dehumidifier running under a Wake County home",
       desc: "Maintain healthy humidity. We install energy-efficient crawl space dehumidifiers to automatically maintain moisture levels below 55% to permanently block mold.",
       cta: "Request Dehumidifier Quote"
@@ -190,14 +190,14 @@ function App() {
     },
     {
       title: "Wood Rot Repair",
-      image: "https://images.unsplash.com/photo-1534224039826-c7a0dea0e66a?auto=format&fit=crop&w=600&q=80",
+      image: "https://images.unsplash.com/photo-1533036495147-3f3cc615af29?auto=format&fit=crop&w=600&q=80",
       altText: "Sistered floor joists and structural wood rot repair for bouncy floors in Raleigh, NC",
       desc: "Strengthen weak floors. We sister damaged floor joists, replace sagged sills, and install heavy-duty steel jacks to level bouncy first-floor framing.",
       cta: "Request Structural Repair"
     },
     {
       title: "Insulation Replacement",
-      image: "https://images.unsplash.com/photo-1581094288338-2314dddb7ecc?auto=format&fit=crop&w=600&q=80",
+      image: "https://images.unsplash.com/photo-1596404746685-64906f3b72ec?auto=format&fit=crop&w=600&q=80",
       altText: "Replacing old wet crawl space insulation with clean pest-resistant insulation in Cary, NC",
       desc: "Boost home efficiency. We remove falling, mold-ridden fiberglass and install clean, pest-resistant insulation options to lower energy bills year-round.",
       cta: "Request Insulation Quote"
@@ -208,29 +208,28 @@ function App() {
     {
       id: 1,
       title: "Wet Space vs. Encapsulation",
-      beforeImage: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=400&q=80",
-      afterImage: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=600&q=80",
+      splitImage: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=800&q=80",
       desc: "Damp Dirt Floor vs. Premium Sealed Encapsulation"
     },
     {
       id: 2,
       title: "Wood Rot vs. Wood Rot Repair",
-      beforeImage: "https://images.unsplash.com/photo-1542013936693-8848e5740a7a?auto=format&fit=crop&w=400&q=80",
-      afterImage: "https://images.unsplash.com/photo-1534224039826-c7a0dea0e66a?auto=format&fit=crop&w=400&q=80",
+      beforeImage: "https://images.unsplash.com/photo-1506540548171-ec5bb7f6a735?auto=format&fit=crop&w=400&q=80",
+      afterImage: "https://images.unsplash.com/photo-1588629737187-578f7e279b94?auto=format&fit=crop&w=400&q=80",
       desc: "Rotted Joists vs. Sistered Beams & Support Jacks"
     },
     {
       id: 3,
       title: "Torn Insulation vs. Sealed Vapor Liner",
-      beforeImage: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=400&q=80",
-      afterImage: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=400&q=80",
+      beforeImage: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?auto=format&fit=crop&w=400&q=80",
+      afterImage: "https://images.unsplash.com/photo-1585412727339-54e4bae3bbf9?auto=format&fit=crop&w=400&q=80",
       desc: "Falling Fiberglass vs. Thick, Double-Reinforced Liner"
     },
     {
       id: 4,
       title: "Poor Grading vs. French Drain & Sump Pump",
-      beforeImage: "https://images.unsplash.com/photo-1542013936693-8848e5740a7a?auto=format&fit=crop&w=400&q=80",
-      afterImage: "https://images.unsplash.com/photo-1585338107529-13afc5f02586?auto=format&fit=crop&w=400&q=80",
+      beforeImage: "https://images.unsplash.com/photo-1518733221980-0a2a4b868bc2?auto=format&fit=crop&w=400&q=80",
+      afterImage: "https://images.unsplash.com/photo-1504307651254-35680f356fce?auto=format&fit=crop&w=400&q=80",
       desc: "Standing Water Pools vs. Automated Sump & French Drains"
     }
   ]
@@ -674,24 +673,38 @@ function App() {
             {galleryItems.map((item) => (
               <div key={item.id} className="gallery-card">
                 <div className="gallery-visuals">
-                  <div className="gallery-image-wrapper">
-                    <img 
-                      src={item.beforeImage} 
-                      alt={`Before: ${item.title} - The Crawl Space Guys NC`} 
-                      className="gallery-img" 
-                      loading="lazy" 
-                    />
-                    <span className="gallery-badge gallery-badge--before">Before</span>
-                  </div>
-                  <div className="gallery-image-wrapper gallery-image-wrapper--after">
-                    <img 
-                      src={item.afterImage} 
-                      alt={`After: ${item.title} - The Crawl Space Guys NC`} 
-                      className="gallery-img" 
-                      loading="lazy" 
-                    />
-                    <span className="gallery-badge gallery-badge--after">After</span>
-                  </div>
+                  {item.splitImage ? (
+                    <div className="gallery-image-wrapper" style={{ width: '100%' }}>
+                      <img 
+                        src={item.splitImage} 
+                        alt={`${item.title} - The Crawl Space Guys NC`} 
+                        className="gallery-img" 
+                        loading="lazy" 
+                        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                      />
+                    </div>
+                  ) : (
+                    <>
+                      <div className="gallery-image-wrapper">
+                        <img 
+                          src={item.beforeImage} 
+                          alt={`Before: ${item.title} - The Crawl Space Guys NC`} 
+                          className="gallery-img" 
+                          loading="lazy" 
+                        />
+                        <span className="gallery-badge gallery-badge--before">Before</span>
+                      </div>
+                      <div className="gallery-image-wrapper gallery-image-wrapper--after">
+                        <img 
+                          src={item.afterImage} 
+                          alt={`After: ${item.title} - The Crawl Space Guys NC`} 
+                          className="gallery-img" 
+                          loading="lazy" 
+                        />
+                        <span className="gallery-badge gallery-badge--after">After</span>
+                      </div>
+                    </>
+                  )}
                 </div>
                 <div className="gallery-desc">{item.desc}</div>
               </div>
