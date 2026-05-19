@@ -190,14 +190,14 @@ function App() {
     },
     {
       title: "Wood Rot Repair",
-      image: "https://images.unsplash.com/photo-1533036495147-3f3cc615af29?auto=format&fit=crop&w=600&q=80",
+      image: "/wood-rot.jpg",
       altText: "Sistered floor joists and structural wood rot repair for bouncy floors in Raleigh, NC",
       desc: "Strengthen weak floors. We sister damaged floor joists, replace sagged sills, and install heavy-duty steel jacks to level bouncy first-floor framing.",
       cta: "Request Structural Repair"
     },
     {
       title: "Insulation Replacement",
-      image: "https://images.unsplash.com/photo-1596404746685-64906f3b72ec?auto=format&fit=crop&w=600&q=80",
+      image: "/insulation.jpg",
       altText: "Replacing old wet crawl space insulation with clean pest-resistant insulation in Cary, NC",
       desc: "Boost home efficiency. We remove falling, mold-ridden fiberglass and install clean, pest-resistant insulation options to lower energy bills year-round.",
       cta: "Request Insulation Quote"
@@ -208,28 +208,28 @@ function App() {
     {
       id: 1,
       title: "Wet Space vs. Encapsulation",
-      splitImage: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=800&q=80",
+      splitImage: "/gallery1-split.jpg",
       desc: "Damp Dirt Floor vs. Premium Sealed Encapsulation"
     },
     {
       id: 2,
       title: "Wood Rot vs. Wood Rot Repair",
-      beforeImage: "https://images.unsplash.com/photo-1506540548171-ec5bb7f6a735?auto=format&fit=crop&w=400&q=80",
-      afterImage: "https://images.unsplash.com/photo-1588629737187-578f7e279b94?auto=format&fit=crop&w=400&q=80",
+      beforeImage: "/gallery2-before.jpg",
+      afterImage: "/gallery2-after.jpg",
       desc: "Rotted Joists vs. Sistered Beams & Support Jacks"
     },
     {
       id: 3,
       title: "Torn Insulation vs. Sealed Vapor Liner",
-      beforeImage: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?auto=format&fit=crop&w=400&q=80",
-      afterImage: "https://images.unsplash.com/photo-1585412727339-54e4bae3bbf9?auto=format&fit=crop&w=400&q=80",
+      beforeImage: "/gallery3-before.jpg",
+      afterImage: "/gallery3-after.jpg",
       desc: "Falling Fiberglass vs. Thick, Double-Reinforced Liner"
     },
     {
       id: 4,
       title: "Poor Grading vs. French Drain & Sump Pump",
-      beforeImage: "https://images.unsplash.com/photo-1518733221980-0a2a4b868bc2?auto=format&fit=crop&w=400&q=80",
-      afterImage: "https://images.unsplash.com/photo-1504307651254-35680f356fce?auto=format&fit=crop&w=400&q=80",
+      beforeImage: "/gallery4-before.jpg",
+      afterImage: "/gallery4-after.jpg",
       desc: "Standing Water Pools vs. Automated Sump & French Drains"
     }
   ]
